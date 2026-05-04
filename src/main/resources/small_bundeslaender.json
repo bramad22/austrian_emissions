@@ -1,0 +1,38 @@
+[
+  {
+    "id": 39852,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 2430247,
+    "year": 1990,
+    "region_id": "76888a3b-ce35-482c-88e6-79cff27be8c5",
+    "region": "Wien",
+    "sektor": "Energie",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt"
+  },
+  {
+    "id": 39408,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 8353.004,
+    "year": 1990,
+    "region_id": "fc5cfc23-3b75-4b7a-9d50-6e4ec018bd1a",
+    "region": "Vorarlberg",
+    "sektor": "Energie",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt"
+  },
+  {
+    "id": 36636,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 476087.22,
+    "year": 1990,
+    "region_id": "9297c491-c419-4ca5-a10f-4d7b93998909",
+    "region": "Kärnten",
+    "sektor": "Energie",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt"
+  }
+]

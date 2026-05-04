@@ -1,0 +1,41 @@
+[
+  {
+    "id": 36316,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 334148.78,
+    "year": 1990,
+    "region_id": "2bc3faed-7cb4-492c-9097-145a0f8f1f01",
+    "region": "Burgenland",
+    "sektor": "Landwirtschaft",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt",
+    "isEstimate": false
+  },
+  {
+    "id": 36349,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 216077.39,
+    "year": 1990,
+    "region_id": "2bc3faed-7cb4-492c-9097-145a0f8f1f01",
+    "region": "Burgenland",
+    "sektor": "Müll",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt",
+    "isEstimate": false
+  },
+  {
+    "id": 36382,
+    "source": "BLI 2025 (1990-2023)",
+    "value": 4758.4907,
+    "year": 1990,
+    "region_id": "2bc3faed-7cb4-492c-9097-145a0f8f1f01",
+    "region": "Burgenland",
+    "sektor": "F-Gase",
+    "pollutant": "THG",
+    "unit": "t CO2eq",
+    "classification": "Gesamt",
+    "isEstimate": false
+  }
+]
