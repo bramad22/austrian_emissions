@@ -1,5 +1,6 @@
 package bramad.austrian_emissions.pojo;
 
+import bramad.austrian_emissions.annotations.ToDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,6 +19,7 @@ public class Region {
     @Id
     private String id;
 
+    @ToDto(key = "regionName")
     private String name;
 
     @JsonBackReference
