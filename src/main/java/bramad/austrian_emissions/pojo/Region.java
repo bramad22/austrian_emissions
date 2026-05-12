@@ -2,6 +2,7 @@ package bramad.austrian_emissions.pojo;
 
 import bramad.austrian_emissions.annotations.ToDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -23,6 +24,6 @@ public class Region {
     private String name;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<RegionData> data;
 }

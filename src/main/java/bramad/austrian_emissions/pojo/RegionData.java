@@ -22,13 +22,13 @@ public class RegionData {
     private String source;
 
     @ToDto(key = "emissionValue")
-    private Long value;
+    private Double value;
 
     @ToDto
     private int year;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     @JsonManagedReference
     private Region region;
 
