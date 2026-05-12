@@ -1,23 +1,24 @@
 package bramad.austrian_emissions.pojo.DTO;
 
-import bramad.austrian_emissions.pojo.Region;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ImportDataDto {
 
     private Long id;
 
     private String source;
 
-    private Long value;
+    private Double value;
 
     private int year;
 
-    private Long region_id;
+    private String region_id;
 
     private String region;
 
