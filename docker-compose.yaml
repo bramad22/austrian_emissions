@@ -3,9 +3,9 @@ services:
     image: postgres:16
     container_name: emissions_db
     environment:
-      POSTGRES_DB: emissions
-      POSTGRES_USER: emissions_user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: 2026_Climate_Project
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
