@@ -1,8 +1,10 @@
 package bramad.austrian_emissions.database;
 
+import bramad.austrian_emissions.Repository.PopulationRepository;
 import bramad.austrian_emissions.Repository.RegionDataRepository;
 import bramad.austrian_emissions.Repository.RegionRepository;
 import bramad.austrian_emissions.pojo.DTO.ImportDataDto;
+import bramad.austrian_emissions.pojo.Population;
 import bramad.austrian_emissions.pojo.Region;
 import bramad.austrian_emissions.pojo.RegionData;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,14 +25,20 @@ public class InitDatabase {
 
     private final RegionDataRepository regionDataRepository;
     private final RegionRepository regionRepository;
+    private final PopulationRepository populationRepository;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @PostConstruct
+    private void init() throws IOException {
+        readEmissionsPerRegionFile();
+        readPopulationDataFile();
+    }
+
     private void readEmissionsPerRegionFile() throws IOException {
 
         InputStream inputStream = this.getClass()
                 .getResourceAsStream("/emissionen_bundeslaender.json");
-
-        ObjectMapper objectMapper = new ObjectMapper();
 
         List<ImportDataDto> importData = objectMapper.readerForListOf(ImportDataDto.class).readValue(inputStream);
 
@@ -64,5 +73,14 @@ public class InitDatabase {
                 .collect(Collectors.toList());
 
         regionDataRepository.saveAll(regionDataList);
+    }
+
+    private void readPopulationDataFile() throws IOException {
+        InputStream inputStream = this.getClass()
+                .getResourceAsStream("/population_data.json");
+
+        List<Population> populations = objectMapper.readerForListOf(Population.class).readValue(inputStream);
+
+        populationRepository.saveAll(populations);
     }
 }
