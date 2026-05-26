@@ -7,22 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegionDataMapper {
-    public static Map<String, Object> toDto(Object o){
-        Map<String,Object> result =new HashMap<>();
+    public static Map<String, Object> toDto(Object o) {
+        Map<String, Object> result = new HashMap<>();
 
-        for(Field field : o.getClass().getDeclaredFields()) {
-            if(field.isAnnotationPresent(ToDto.class)) {
+        for (Field field : o.getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(ToDto.class)) {
                 try {
                     field.setAccessible(true);
-
                     ToDto annotation = field.getAnnotation(ToDto.class);
-                    String key = annotation.key();
-
-                    if(key.isEmpty()) {
-                        key = field.getName();
-                    }
+                    String key = annotation.key().isEmpty() ? field.getName() : annotation.key();
 
                     Object value = field.get(o);
+
+                    if (value != null && !value.getClass().isPrimitive() && !value.getClass().equals(String.class)
+                            && !value.getClass().equals(Double.class) && !value.getClass().equals(Integer.class)
+                            && !value.getClass().equals(Long.class)) {
+                        value = toDto(value);
+                    }
+
                     result.put(key, value);
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
