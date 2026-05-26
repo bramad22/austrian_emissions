@@ -15,10 +15,8 @@ import lombok.NoArgsConstructor;
 public class RegionData {
 
     @Id
-    @ToDto
     private Long id;
 
-    @ToDto(key = "dataSource")
     private String source;
 
     @ToDto(key = "emissionValue")
@@ -37,12 +35,10 @@ public class RegionData {
     @JsonAlias("sektor")
     private String sector;
 
-    @ToDto
     private String pollutant;
 
     @ToDto
     private String unit;
 
-    @ToDto
     private String classification;
 }
