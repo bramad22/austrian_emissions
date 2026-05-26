@@ -1,72 +1,72 @@
-GET localhost:8080/api/v1/test
+GET localhost:8080/api/v1/emission/test
 
 
 
 
 ### // Detailed Emissions
 
-GET localhost:8080/api/v1/emissionDetailed
+GET localhost:8080/api/v1/emission/emissionDetailed
 
 ###
 
-GET localhost:8080/api/v1/emissionDetailed?region=Steiermark
+GET localhost:8080/api/v1/emission/emissionDetailed?region=Steiermark
 
 ###
 
-GET localhost:8080/api/v1/emissionDetailed?region=Steiermark&year=2000
+GET localhost:8080/api/v1/emission/emissionDetailed?region=Steiermark&year=2000
 
 ###
 
-GET localhost:8080/api/v1/emissionDetailed?region=Steiermark&year=2000&sector=Verkehr
+GET localhost:8080/api/v1/emission/emissionDetailed?region=Steiermark&year=2000&sector=Verkehr
 
 ###
 
-GET localhost:8080/api/v1/emissionDetailed?endYear=2000
+GET localhost:8080/api/v1/emission/emissionDetailed?endYear=2000
 
 
 
 
 ### // Total Emissions
 
-GET localhost:8080/api/v1/totalEmissions
+GET localhost:8080/api/v1/emission/totalEmissions
 
 ###
 
-GET localhost:8080/api/v1/totalEmissions?region=Steiermark&year=2022
+GET localhost:8080/api/v1/emission/totalEmissions?region=Steiermark&year=2022
 
 
 
 
 ### // Emissions Per Capita
 
-GET localhost:8080/api/v1/emissionPerCapita?region=Steiermark&year=2001
+GET localhost:8080/api/v1/emission/emissionPerCapita?region=Steiermark&year=2001
 
 
 
 
 ### // Total Emissions Per Capita
 
-GET localhost:8080/api/v1/totalEmissionPerCapita?region=Steiermark&year=2000
+GET localhost:8080/api/v1/emission/totalEmissionPerCapita?region=Steiermark&year=2000
 
 
 
 
 ### // Total Emissions Per Sector
 
-GET localhost:8080/api/v1/totalEmissionPerSector
+GET localhost:8080/api/v1/emission/totalEmissionPerSector
 
 ###
 
-GET localhost:8080/api/v1/totalEmissionPerSector?sector=KSG&year=2000
+GET localhost:8080/api/v1/emission/totalEmissionPerSector?sector=KSG&year=2000
 
 ###
 
-GET localhost:8080/api/v1/totalEmissionPerSector?startYear=2000
+GET localhost:8080/api/v1/emission/totalEmissionPerSector?startYear=2000
 
 
 
 
 ### // Percentage Change
 
-GET localhost:8080/api/v1/percentageChange?startYear=2019&endYear=2021&region=Steiermark&sector=KSG
+GET localhost:8080/api/v1/emission/percentageChange?startYear=2019&endYear=2021&region=Steiermark&sector=KSG
 
