@@ -42,7 +42,7 @@ public class RegionDataService {
         return filterEmissionData(region, sector, year, startYear, endYear)
                 .map(data -> {
                     String currentRegion = data.getRegion().getName();
-                    Integer currentYear = data.getYear();
+                    int currentYear = data.getYear();
                     Long emissionValue = data.getValue();
                     String currentSector = data.getSector();
 
@@ -76,5 +76,51 @@ public class RegionDataService {
                                 Collectors.summingLong(RegionData::getValue)
                         )
                 ));
+    }
+
+    public List<Map<String, Object>> percentageChange (String region, String sector, String year, String startYear, String endYear) {
+        List<RegionData> filteredData = filterEmissionData(region, sector, year, startYear, endYear)
+                .sorted(Comparator.comparing(RegionData::getYear))
+                .toList();
+
+        Map<String, Map<String, List<RegionData>>> groupedByRegionAndSector = filteredData.stream()
+                .collect(Collectors.groupingBy(
+                        rd -> rd.getRegion().getName(),
+                        Collectors.groupingBy(
+                                RegionData::getSector,
+                                Collectors.toList()
+                        )
+                ));
+
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Map.Entry<String, Map<String, List<RegionData>>> regionEntry : groupedByRegionAndSector.entrySet()) {
+            String currentRegion = regionEntry.getKey();
+
+            for (Map.Entry<String, List<RegionData>> sectorEntry : regionEntry.getValue().entrySet()) {
+                String currentSector = sectorEntry.getKey();
+                List<RegionData> dataForSector = sectorEntry.getValue();
+
+                for (int i = 1; i < dataForSector.size(); i++) {
+                    RegionData prev = dataForSector.get(i - 1);
+                    RegionData curr = dataForSector.get(i);
+
+                    double prevValue = prev.getValue();
+                    double currValue = curr.getValue();
+                    double percentageChange = ((currValue - prevValue) / prevValue) * 100;
+
+                    Map<String, Object> trend = new HashMap<>();
+                    trend.put("region", currentRegion);
+                    trend.put("sector", currentSector);
+                    trend.put("year", curr.getYear());
+                    trend.put("percentageChange", percentageChange);
+                    trend.put("unit", "t CO2eq");
+
+                    result.add(trend);
+                }
+            }
+        }
+
+        return result;
     }
 }

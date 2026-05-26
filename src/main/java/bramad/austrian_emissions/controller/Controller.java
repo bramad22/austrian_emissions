@@ -102,5 +102,22 @@ public class Controller {
                 endYear
         );
     }
+
+    @GetMapping("/percentageChange")
+    public List<Map<String, Object>> percentageChange(
+            @RequestParam(required = false) String region,
+            @RequestParam(required = false) String sector,
+            @RequestParam(required = false) String year,
+            @RequestParam(required = false) String startYear,
+            @RequestParam(required = false) String endYear
+    ) {
+        return regionService.percentageChange(
+                region,
+                sector,
+                year,
+                startYear,
+                endYear
+        );
+    }
 }
 
