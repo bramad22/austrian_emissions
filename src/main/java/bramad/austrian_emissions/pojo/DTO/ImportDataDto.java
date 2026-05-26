@@ -14,7 +14,7 @@ public class ImportDataDto {
 
     private String source;
 
-    private Double value;
+    private Long value;
 
     private int year;
 
