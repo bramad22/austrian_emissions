@@ -8,10 +8,7 @@ import bramad.austrian_emissions.pojo.RegionData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -63,5 +60,21 @@ public class RegionDataService {
                     return result;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public Map<Integer, Map<String, Long>> totalEmissionsPerYearPerSector (String sector, String year, String startYear, String endYear) {
+        return regionDataRepository.findAll().stream()
+                .filter(rd -> sector == null || sector.isEmpty() || rd.getSector().equals(sector))
+                .filter(rd -> year == null || year.isEmpty() || rd.getYear() == Integer.parseInt(year))
+                .filter(rd -> startYear == null || startYear.isEmpty() || rd.getYear() >= Integer.parseInt(startYear))
+                .filter(rd -> endYear == null || endYear.isEmpty() || rd.getYear() <= Integer.parseInt(endYear))
+                .collect(Collectors.groupingBy(
+                        RegionData::getYear,
+                        TreeMap::new,
+                        Collectors.groupingBy(
+                                RegionData::getSector,
+                                Collectors.summingLong(RegionData::getValue)
+                        )
+                ));
     }
 }

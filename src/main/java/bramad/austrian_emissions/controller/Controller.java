@@ -2,7 +2,6 @@ package bramad.austrian_emissions.controller;
 
 import bramad.austrian_emissions.service.RegionDataService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,6 +82,21 @@ public class Controller {
         return regionService.emissionsPerCapita(
                 region,
                 "KSG",
+                year,
+                startYear,
+                endYear
+        );
+    }
+
+    @GetMapping("/totalEmissionPerSector")
+    public Map<Integer, Map<String, Long>> totalEmissionPerSector(
+            @RequestParam(required = false) String sector,
+            @RequestParam(required = false) String year,
+            @RequestParam(required = false) String startYear,
+            @RequestParam(required = false) String endYear
+    ) {
+        return regionService.totalEmissionsPerYearPerSector(
+                sector,
                 year,
                 startYear,
                 endYear
