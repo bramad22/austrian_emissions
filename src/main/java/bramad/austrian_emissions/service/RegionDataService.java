@@ -79,6 +79,7 @@ public class RegionDataService {
     }
 
     public List<Map<String, Object>> percentageChange(String region, String sector, String year, String startYear, String endYear) {
+
         List<RegionData> filteredData = filterEmissionData(region, sector, year, startYear, endYear)
                 .sorted(Comparator.comparing((RegionData rd) -> rd.getRegion().getName())
                         .thenComparing(RegionData::getSector)
