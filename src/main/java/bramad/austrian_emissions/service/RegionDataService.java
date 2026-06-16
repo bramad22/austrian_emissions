@@ -35,7 +35,6 @@ public class RegionDataService {
                 .collect(Collectors.toList());
     }
 
-
     public List<Map<String, Object>> emissionsPerCapita(
             String region, String sector, String year, String startYear, String endYear) {
 
