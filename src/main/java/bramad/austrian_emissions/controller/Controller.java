@@ -119,5 +119,10 @@ public class Controller {
                 endYear
         );
     }
+
+    @GetMapping("/heatingShare")
+    public Map<String, Object> calculateHeatingShare(@RequestParam int year) {
+        return regionService.calculateHeatingShare(year);
+    }
 }
 

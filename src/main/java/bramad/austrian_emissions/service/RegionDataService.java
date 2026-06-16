@@ -8,6 +8,8 @@ import bramad.austrian_emissions.pojo.RegionData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.client.RestTemplate;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,6 +17,8 @@ import java.util.stream.Stream;
 @Service
 @RequiredArgsConstructor
 public class RegionDataService {
+
+    private final RestTemplate restTemplate;
 
     private final RegionDataRepository regionDataRepository;
 
@@ -113,5 +117,47 @@ public class RegionDataService {
         }
 
         return result;
+    }
+
+    public Map<String, Object> calculateHeatingShare(int year) {
+
+        if (year > 2022 || year < 2004) {
+            return Map.of(
+                    "Error", "There are only values available between 2004 and 2022!"
+            );
+        }
+
+        String heatingUrl = "http://10.143.165.155:8080/api/v1/heating/by_region/co2_ton_equ?year=" + year;
+
+        Map<String, Object> heatingResponse = restTemplate.getForObject(heatingUrl, Map.class);
+
+        Map<String, Double> heatingEmissions = (Map<String, Double>) heatingResponse.get("conversion");
+
+        Map<String, Long> buildingEmissions = regionDataRepository.findAll().stream()
+                .filter(rd -> rd.getSector().equals("Gebäude"))
+                .filter(rd -> rd.getYear() == year)
+                .collect(Collectors.toMap(
+                        rd -> rd.getRegion().getName(),
+                        RegionData::getValue
+                ));
+
+        Map<String, Object> heatingShare = new HashMap<>();
+
+        if (heatingEmissions != null) {
+            for (Map.Entry<String, Double> entry : heatingEmissions.entrySet()) {
+                String region = entry.getKey();
+                Double heatingValue = entry.getValue();
+                Long buildingValue = buildingEmissions.getOrDefault(region, 0L);
+
+                if (buildingValue != 0) {
+                    double share = (heatingValue / buildingValue) * 100;
+                    heatingShare.put(region, Math.floor(share * 1000) / 1000);
+                } else {
+                    heatingShare.put(region, 0.0);
+                }
+            }
+        }
+
+        return heatingShare;
     }
 }
