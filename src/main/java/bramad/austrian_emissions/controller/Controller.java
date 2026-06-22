@@ -23,106 +23,106 @@ public class Controller {
     }
 
     @GetMapping("/emissionDetailed")
-    public List<Map<String, Object>> getRegionData(
+    public ResponseEntity<List<Map<String, Object>>> getRegionData(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String sector,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.getEmissionDetailed(
+        return ResponseEntity.ok(regionService.getEmissionDetailed(
                 region,
                 sector,
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/totalEmissions")
-    public List<Map<String, Object>> totalEmissions(
+    public ResponseEntity<List<Map<String, Object>>> totalEmissions(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.getEmissionDetailed(
+        return ResponseEntity.ok(regionService.getEmissionDetailed(
                 region,
                 "KSG",
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/emissionPerCapita")
-    public List<Map<String, Object>> emissionPerCapita(
+    public ResponseEntity<List<Map<String, Object>>> emissionPerCapita(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String sector,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.emissionsPerCapita(
+        return ResponseEntity.ok(regionService.emissionsPerCapita(
                 region,
                 sector,
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/totalEmissionPerCapita")
-    public List<Map<String, Object>> totalEmissionPerCapita(
+    public ResponseEntity<List<Map<String, Object>>> totalEmissionPerCapita(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.emissionsPerCapita(
+        return ResponseEntity.ok(regionService.emissionsPerCapita(
                 region,
                 "KSG",
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/totalEmissionPerSector")
-    public Map<Integer, Map<String, Long>> totalEmissionPerSector(
+    public ResponseEntity<Map<Integer, Map<String, Long>>> totalEmissionPerSector(
             @RequestParam(required = false) String sector,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.totalEmissionsPerYearPerSector(
+        return ResponseEntity.ok(regionService.totalEmissionsPerYearPerSector(
                 sector,
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/percentageChange")
-    public List<Map<String, Object>> percentageChange(
+    public ResponseEntity<List<Map<String, Object>>> percentageChange(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String sector,
             @RequestParam(required = false) String year,
             @RequestParam(required = false) String startYear,
             @RequestParam(required = false) String endYear
     ) {
-        return regionService.percentageChange(
+        return ResponseEntity.ok(regionService.percentageChange(
                 region,
                 sector,
                 year,
                 startYear,
                 endYear
-        );
+        ));
     }
 
     @GetMapping("/heatingShare")
-    public Map<String, Object> calculateHeatingShare(@RequestParam int year) {
-        return regionService.calculateHeatingShare(year);
+    public ResponseEntity<Map<String, Object>> calculateHeatingShare(@RequestParam int year) {
+        return ResponseEntity.ok(regionService.calculateHeatingShare(year));
     }
 }
 

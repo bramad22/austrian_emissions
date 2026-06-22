@@ -6,6 +6,7 @@ import bramad.austrian_emissions.mapper.RegionDataMapper;
 import bramad.austrian_emissions.pojo.Population;
 import bramad.austrian_emissions.pojo.RegionData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
